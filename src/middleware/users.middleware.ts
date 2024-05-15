@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { Users } from "../models/User.model";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
-import { createUser, deleteUser, getUserById, getUsers, updateUser } from "../controllers/User.controller";
+import { createUser, deleteUser, getUserById, getUsers, updateUser } from "../controllers/user.controller";
 
 /**
  * Middleware to create a user
@@ -16,8 +16,13 @@ export const createUserMiddleware: RequestHandler = async (req, res) => {
     await createUser(userData);
 
     return res.status(201).json({ message: "User created successfully" });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error creating user", error);
+
+    if (error.sqlMessage.includes("Duplicate entry")) {
+      return res.status(409).json({ message: "User already exists" });
+    }
+
     return res.status(500).json({ message: "Internal server error" });
   }
 }
