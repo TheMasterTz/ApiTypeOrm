@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AppDataSources } from "../database/connection";
 
 @Entity({ name: 'users' })
 export class Users {
@@ -24,3 +25,5 @@ export class Users {
   })
   updated_at!: Date;
 }
+
+export const userRepository = AppDataSources.getRepository(Users)
