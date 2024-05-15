@@ -1,5 +1,5 @@
 {
-  "name": "ApiTypeOrm",
+  "name": "apitypeorm",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,12 +9,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "_moduleAliases": {
-    "@": "./src"
-  },
-  "_moduleDirectories": [
-    "node_modules"
-  ],
   "dependencies": {
     "cors": "2.8.5",
     "dotenv": "16.4.5",
