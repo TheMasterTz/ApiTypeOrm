@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { getUserByEmail } from "../controllers/User.controller";
+import { getUserByEmail } from "../controllers/user.controller";
 
 /**
  * Middleware to authenticate a user
