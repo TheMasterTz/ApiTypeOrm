@@ -7,7 +7,7 @@ import { z } from "zod";
 import UserRoutes from "../routes/users.routes";
 import AuthRoutes from "../routes/auth.routes";
 
-// validate environment variables
+// Load environment variables
 const envSchema = z.object({
   PORT: z.string(),
   DB_HOST: z.string(),
@@ -18,6 +18,7 @@ const envSchema = z.object({
 
 envSchema.parse(process.env);
 
+// infer the type of the environment variables
 declare global {
   namespace NodeJS {
     interface ProcessEnv extends z.infer<typeof envSchema> {}

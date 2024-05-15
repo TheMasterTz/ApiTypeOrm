@@ -2,6 +2,11 @@ import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity
 import { AppDataSources } from "../database/connection";
 import { Users } from "../models/User.model";
 
+/*
+  * Function to create a user
+  * @param data User data
+  * @returns Promise
+  */
 export const createUser = (data: QueryDeepPartialEntity<Users>) => {
   return AppDataSources
     .createQueryBuilder()
@@ -11,6 +16,10 @@ export const createUser = (data: QueryDeepPartialEntity<Users>) => {
     .execute();
 }
 
+/**
+ * Function to get all users
+ * @returns Promise
+ */
 export const getUsers = () => {
   return AppDataSources
     .createQueryBuilder()
@@ -19,6 +28,11 @@ export const getUsers = () => {
     .getMany();
 }
 
+/**
+ * Function to get a user by ID
+ * @param id User ID
+ * @returns Promise
+ */
 export const getUserById = (id: number) => {
   return AppDataSources
     .createQueryBuilder()
@@ -28,6 +42,11 @@ export const getUserById = (id: number) => {
     .getOne();
 }
 
+/**
+ * Function to get a user by email
+ * @param email User email
+ * @returns Promise
+ */
 export const getUserByEmail = (email: string) => {
   return AppDataSources
     .createQueryBuilder()
@@ -37,6 +56,11 @@ export const getUserByEmail = (email: string) => {
     .getOne();
 }
 
+/**
+ * Function to delete a user
+ * @param id User ID
+ * @returns Promise
+ */
 export const deleteUser = (id: number) => {
   return AppDataSources
     .createQueryBuilder()
@@ -46,6 +70,12 @@ export const deleteUser = (id: number) => {
     .execute();
 }
 
+/**
+ * Function to update a user
+ * @param id User ID
+ * @param data User data
+ * @returns Promise
+ */
 export const updateUser = (id: number, data: QueryDeepPartialEntity<Users>) => {
   return AppDataSources
     .createQueryBuilder()
