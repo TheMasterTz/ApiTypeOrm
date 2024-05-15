@@ -1,6 +1,5 @@
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
-import { AppDataSources } from "../database/connection";
-import { Users } from "../models/User.model";
+import { userRepository, Users } from "../models/User.model";
 
 /*
   * Function to create a user
@@ -8,12 +7,7 @@ import { Users } from "../models/User.model";
   * @returns Promise
   */
 export const createUser = (data: QueryDeepPartialEntity<Users>) => {
-  return AppDataSources
-    .createQueryBuilder()
-    .insert()
-    .into(Users)
-    .values(data)
-    .execute();
+  return userRepository.insert(data);
 }
 
 /**
@@ -21,11 +15,7 @@ export const createUser = (data: QueryDeepPartialEntity<Users>) => {
  * @returns Promise
  */
 export const getUsers = () => {
-  return AppDataSources
-    .createQueryBuilder()
-    .select("users")
-    .from(Users, "users")
-    .getMany();
+  return userRepository.find();
 }
 
 /**
@@ -34,12 +24,7 @@ export const getUsers = () => {
  * @returns Promise
  */
 export const getUserById = (id: number) => {
-  return AppDataSources
-    .createQueryBuilder()
-    .select("users")
-    .from(Users, "users")
-    .where("id = :id", { id })
-    .getOne();
+  return userRepository.findOneBy({ id });
 }
 
 /**
@@ -48,12 +33,7 @@ export const getUserById = (id: number) => {
  * @returns Promise
  */
 export const getUserByEmail = (email: string) => {
-  return AppDataSources
-    .createQueryBuilder()
-    .select("users")
-    .from(Users, "users")
-    .where("email = :email", { email })
-    .getOne();
+  return userRepository.findOneBy({ email });
 }
 
 /**
@@ -62,12 +42,7 @@ export const getUserByEmail = (email: string) => {
  * @returns Promise
  */
 export const deleteUser = (id: number) => {
-  return AppDataSources
-    .createQueryBuilder()
-    .delete()
-    .from(Users)
-    .where("id = :id", { id })
-    .execute();
+  return userRepository.delete({ id });
 }
 
 /**
@@ -77,10 +52,5 @@ export const deleteUser = (id: number) => {
  * @returns Promise
  */
 export const updateUser = (id: number, data: QueryDeepPartialEntity<Users>) => {
-  return AppDataSources
-    .createQueryBuilder()
-    .update(Users)
-    .set(data)
-    .where("id = :id", { id })
-    .execute();
+  return userRepository.update({ id }, data);
 }
